@@ -33,15 +33,24 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 export default {
   data: () => ({
     email: '',
     password: ''
   }),
-
+  
   methods: {
-    createAccount () {
 
+
+    createAccount () {
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+      .then(() =>{
+        alert('Conta criada com sucesso!')
+      })
+      .catch(error => {
+        alert('Erro na criação da Conta')
+      })
     },
 
     returnToLogin () {

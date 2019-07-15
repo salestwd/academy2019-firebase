@@ -15,7 +15,7 @@
         </div>
 
         <div class="actions">
-          <button type="submit" class="center" @click="submitLogin">
+          <button type="submit" class="center">
             Acessar
           </button>
         </div>
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   data: () => ({
     email: '',
@@ -41,8 +43,25 @@ export default {
 
   methods: {
     submitLogin () {
-
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode === 'auth/wrong-password') {
+          alert('Wrong password.')
+        } else {
+          alert(errorMessage)
+        }
+      })
     },
+
+        
+/*         .then(() => {
+          alert('Login realizado com Sucesso')
+        })
+        .catch(error => {
+          alert('Erro ao realizar Login' + error)
+        }) */
 
     handleNewAccount () {
       this.$router.push({ path: '/create_account' })
