@@ -43,9 +43,15 @@ export default {
 
   methods: {
     submitLogin () {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      .then(() => { 
+        alert('Login Realizado com Sucesso!')
+        this.$router.push({ path: '/feed' })
+      })
+      .catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
+        
         // [START_EXCLUDE]
         if (errorCode === 'auth/wrong-password') {
           alert('Wrong password.')
@@ -55,19 +61,12 @@ export default {
       })
     },
 
-        
-/*         .then(() => {
-          alert('Login realizado com Sucesso')
-        })
-        .catch(error => {
-          alert('Erro ao realizar Login' + error)
-        }) */
-
     handleNewAccount () {
       this.$router.push({ path: '/create_account' })
     }
   }
 }
+
 </script>
 
 <style scoped>

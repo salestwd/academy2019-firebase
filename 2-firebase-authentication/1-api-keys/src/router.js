@@ -25,6 +25,11 @@ const router = new Router({
       path: '/create_account',
       name: 'createaccount',
       component: () => import(/* webpackChunkName: "login" */ './views/CreateAccount.vue')
+    },
+    {
+      path: '/feed',
+      name: 'Feed',
+      component: () => import(/* webpackChunkName: "feed" */ './views/Feed.vue')
     }
   ]
 })
