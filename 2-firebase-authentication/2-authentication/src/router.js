@@ -30,7 +30,7 @@ const router = new Router({
       path: '/Feed',
       name: 'Feed',
       component: () => import(/* webpackChunkName: "login" */ './views/Feed.vue')
-    },
+    }
   ]
 })
 

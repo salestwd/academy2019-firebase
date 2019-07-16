@@ -46,9 +46,17 @@ export default {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
           alert('Autenticado com sucesso!')
-          this.$router.push({ path: '/Feed' })
-        }).catch(() => {
-          alert('Falha na autenticação!')
+          this.$router.push({ path: '/feed' })
+        })
+        .catch(function (error) {
+          var errorCode = error.code
+          var errorMessage = error.message
+          // [START_EXCLUDE]
+          if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password.')
+          } else {
+            alert(errorMessage)
+          }
         })
     },
 
